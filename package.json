@@ -1,6 +1,6 @@
 {
   "name": "grunt-protoc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "protoc generator plugin",
   "keywords": [
     "gruntplugin"
