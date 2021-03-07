@@ -1,5 +1,5 @@
 {
-  "name": "grunt-protoc",
+  "name": "grunt-protoc-plugin",
   "version": "1.0.0",
   "description": "Grunt plugin to generate from proto files",
   "keywords": [
