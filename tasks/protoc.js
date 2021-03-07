@@ -39,9 +39,13 @@ module.exports = function (grunt) {
             if(pluginPath){
                 command  += ` --plugin=${pluginPath}`;
             }
-            if (!_.isUndefined(plugin)) {
+            if (!_.isUndefined(plugin) && !_.isUndefined(output)) {
                 command += ` --${plugin}_out=${output}`;
             }
+        }
+
+        for(let include of includes){
+            command += ` --proto_path=${include}`
         }
 
         command += ` ${proto}`;
