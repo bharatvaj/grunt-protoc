@@ -19,23 +19,32 @@ module.exports = function (grunt) {
             , exitCodes = 0
             , done = this.async()
             , proto = data.proto
-            , command = "protoc"
-            , target = this.target
-            , plugin = data.plugin
-            , output = data.output
+            , protocPath = data.protocPath
+            , transpile = data.transpile
             , includes = data.includes
             ;
 
         proto = _.isArray(proto) ? proto : [proto];
         proto = proto.join(" ");
+        protocPath = protocPath ? protocPath : "protoc";
 
-        command  = command + " --" + target + "_out=" + output;
+        // command  = command + " --" + target + "_out=" + output;
+        var command = `${protocPath}`
 
-        if (!_.isUndefined(plugin)) {
-            command  = command + " --plugin=" + plugin;
+        for(let t of transpile){
+            let plugin = t.plugin,
+                pluginPath=t.pluginPath,
+                output=t.output;
+
+            if(pluginPath){
+                command  += ` --plugin=${pluginPath}`;
+            }
+            if (!_.isUndefined(plugin)) {
+                command += ` --${plugin}_out=${output}`;
+            }
         }
-        command  = command + " " + proto
 
+        command += ` ${proto}`;
 
         verbose.ok(command);
 

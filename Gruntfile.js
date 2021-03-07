@@ -1,20 +1,40 @@
 module.exports = function (grunt) {
     grunt.initConfig({
-        protoc: {
-            php: {
-                proto: ["*.proto"],
-                includes: ["."],
-                plugin: process.env['HOME'] + "/.composer/vendor/bin/protoc-gen-php",
-                output: "php"
+        mkdir: {
+            all: {
+              options: {
+                mode: 0700,
+                create: ['model/js', 'model/ts']
+              },
             },
-            cpp: {
+          },
+        protoc: {
+            server: {
                 proto: ["*.proto"],
                 includes: ["."],
-                output: "cpp"
+                transpile: [
+                    {
+                        plugin: "js",
+                        output: "model/js"
+                    }
+                ]
+            },
+            client: {
+                protocPath: "node_modules/protoc/protoc/bin/protoc",
+                proto: ["*.proto"],
+                includes: ["."],
+                transpile: [
+                    {
+                        plugin: "ts",
+                        pluginPath: "node_modules/ts-protoc-gen/bin/protoc-gen-ts",
+                        output: "model/ts"
+                    }
+                ]
             }
         }
     });
     grunt.loadTasks('tasks');
 
-    //grunt.loadNpmTasks('grunt-protoc');
+    grunt.loadNpmTasks('grunt-mkdir');
+    grunt.registerTask('default', ['mkdir', 'protoc']);
 };
