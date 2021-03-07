@@ -1,6 +1,6 @@
 {
   "name": "grunt-protoc",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Grunt plugin to generate from proto files",
   "keywords": [
     "gruntplugin",
@@ -22,7 +22,9 @@
     "url": "git://github.com/bharatvaj/grunt-protoc.git"
   },
   "author": "Bharatvaj H",
-  "contributors": ["Shuhei Tanuma"],
+  "contributors": [
+    "Shuhei Tanuma"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bharatvaj/grunt-protoc/issues"
